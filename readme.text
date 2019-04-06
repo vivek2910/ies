@@ -1,0 +1,10 @@
+1. Installing next-routes for enabling dynamic routing in our application : 
+		> npm install --save next-routes
+
+> after installing first thing we are going to do is create a route.js file. this file defines the custom routes of our application that have for ex the election contract address address in the urls.
+
+> besides that we are going to create a server.js file. route.js does nothing. purpose of server.js file is to manually start up our next app and specificall tell it to use all routes defined inside of route.js
+
+> the outher thing route does is that it is going to eventally export a set of navigation helpers that will allow our comps to automatically navigate our users around application.
+
+> also refer to video 172 for furthur explanation of server.js file

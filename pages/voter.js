@@ -54,7 +54,7 @@ class Voter extends Component {
     event.preventDefault();
     const voter = await IES.methods.voters(this.state.aadhaarSearch).call();
     this.setState({
-      voterAadhaar: voter[0],
+      voterAadhaar: parseInt(voter[0]).toString(),
       voterName: voter[1],
       boothAddress: voter[2],
       flag: true,

@@ -2,25 +2,25 @@ pragma solidity >=0.4.22 <0.6.0;
 
 contract IES {
 
-    uint public constCount = 1;
-    uint public boothCount = 1;
+    uint256 public constCount = 1;
+    uint256 public boothCount = 1;
 
     struct Constituency {
-        uint constId;
+        uint256 constId;
         string constName;
         address constAddress;
         mapping (address => bool) boothAddresses;
     }
 
     struct Pollbooth {
-        uint boothId;
-        uint constId;
+        uint256 boothId;
+        uint256 constId;
         string boothDescription;
         address boothAddress;
     }
 
     struct VoterInfo {
-        uint aadhar;
+        uint256 aadhar;
         string name;
         address boothAddress;
     }
@@ -31,9 +31,9 @@ contract IES {
     }
 
 
-    mapping (uint => Constituency) public constituency;
-    mapping (uint => Pollbooth) public booth;
-    mapping (uint => VoterInfo) public voters;
+    mapping (uint256 => Constituency) public constituency;
+    mapping (uint256 => Pollbooth) public booth;
+    mapping (uint256 => VoterInfo) public voters;
 
     function createConstituency(string memory constName, address constAddress) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
@@ -47,7 +47,7 @@ contract IES {
         constCount++;
     }
 
-    function createBooth(uint constId, string memory boothDescription, address boothAddress) public {
+    function createBooth(uint256 constId, string memory boothDescription, address boothAddress) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
 
         Pollbooth memory newBooth = Pollbooth({
@@ -61,7 +61,7 @@ contract IES {
         constituency[constId].boothAddresses[boothAddress] = true;
     }
 
-    function addVoter(uint aadhar, string memory name, uint boothId) public {
+    function addVoter(uint256 aadhar, string memory name, uint256 boothId) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
 
         VoterInfo memory voter = VoterInfo({
@@ -72,7 +72,7 @@ contract IES {
         voters[aadhar] = voter;
     }
 
-    function editConstData(uint constId, string memory newConstName, address newConstAddress) public {
+    function editConstData(uint256 constId, string memory newConstName, address newConstAddress) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
         constituency[constId].constName = newConstName;
         constituency[constId].constAddress = newConstAddress;
@@ -80,21 +80,21 @@ contract IES {
 
     // change what happens with thw const id and booth address in const mapping
 
-    function editBoothData(uint boothId, string memory newBoothDescription, address newBoothAddress) public {
+    function editBoothData(uint256 boothId, string memory newBoothDescription, address newBoothAddress) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
         booth[boothId].boothDescription = newBoothDescription;
         booth[boothId].boothAddress = newBoothAddress;
     }
 
-    function getConst(uint constId) public view returns (uint, string memory, address) {
+    function getConst(uint256 constId) public view returns (uint256, string memory, address) {
         return(constituency[constId].constId, constituency[constId].constName, constituency[constId].constAddress);
     }
 
-    function checkBoothAddress(uint constId, address boothAddress) public returns (bool) {
+    function checkBoothAddress(uint256 constId, address boothAddress) public returns (bool) {
         return (constituency[constId].boothAddresses[boothAddress]);
     }
 
-    function checkVoterBooth(uint aadhar, address boothAdd) public returns(bool) {
+    function checkVoterBooth(uint256 aadhar, address boothAdd) public returns(bool) {
         return (voters[aadhar].boothAddress == boothAdd);
     }
 
@@ -113,7 +113,7 @@ contract IES {
         electionDetalis.push(newElection);
     }
 
-    function getDeployedElections() public view returns (uint) {
+    function getDeployedElections() public view returns (uint256) {
         return electionDetalis.length;
     }
 
@@ -132,22 +132,22 @@ contract Election {
     }
 
     struct Candidate {
-        uint candId;
-        uint constId;
+        uint256 candId;
+        uint256 constId;
         string candName;
         string candParty;
-        uint candVotes;
+        uint256 candVotes;
         string symbolHash;
     }
 
-    mapping (uint => uint) public voteInfo ;
-    mapping (uint => Candidate) public candidate;
-    mapping (uint => uint[]) public candConst;
-    mapping (uint => uint) public candConstCount;
-    uint public candCount = 1;
+    mapping (uint256 => uint256) public voteInfo ;
+    mapping (uint256 => Candidate) public candidate;
+    mapping (uint256 => uint256[]) public candConst;
+    mapping (uint256 => uint256) public candConstCount;
+    uint256 public candCount = 1;
 
 
-    function addCand(uint constId, string memory candName, string memory candParty, string memory symbolHash) public {
+    function addCand(uint256 constId, string memory candName, string memory candParty, string memory symbolHash) public {
         require(msg.sender == 0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290);
 
         Candidate memory newCandidate = Candidate({
@@ -176,7 +176,7 @@ contract Election {
         endPoll = true;
     }
 
-   function voteCandidate(uint constId, uint candId, uint aadhar) public {
+   function voteCandidate(uint256 constId, uint256 candId, uint256 aadhar) public {
         require(
             (ies.checkBoothAddress(constId, msg.sender) == true) &&
             (ies.checkVoterBooth(aadhar, msg.sender) == true) &&

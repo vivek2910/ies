@@ -8,7 +8,7 @@ fs.removeSync(buildPath); //overwritting the build folder using remove sync fuct
 const iesPath = path.resolve(
   __dirname,
   "contracts",
-  "DigitalIdentification.sol"
+  "IES.sol"
 ); //path of contract sol file
 const source = fs.readFileSync(iesPath, "utf-8"); //read operation from the contract file to compile
 const output = solc.compile(source, 1).contracts; // o/p variable of above compilation

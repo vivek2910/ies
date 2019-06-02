@@ -71,7 +71,7 @@ class ConstsIndex extends Component {
     const items = this.props.consts.map(constituency => {
       return (
         <Table.Row key={constituency[0]}>
-          <Table.Cell>{constituency[0]}</Table.Cell>
+          <Table.Cell>{parseInt(constituency[0]).toString()}</Table.Cell>
           <Table.Cell>{constituency[1]}</Table.Cell>
           <Table.Cell>{constituency[2]}</Table.Cell>
         </Table.Row>
@@ -212,6 +212,8 @@ class ConstsIndex extends Component {
   }
 
   render() {
+    console.log('here', this.props.consts);
+    
     return (
       <Layout link="/constituencies/constsIndex">
         <center>

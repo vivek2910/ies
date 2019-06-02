@@ -45,6 +45,8 @@ class ElectionIndex extends Component {
 
   renderButton() {
     if (this.props.Account == "0xb78a868E82D16e9deAE3A66b31dCA72E0f55B290") {
+      console.log("here");
+      
       return (
         <Link route="/elections/new">
           <a>

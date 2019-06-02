@@ -106,9 +106,9 @@ class BoothIndex extends Component {
   renderRow() {
     const items = this.props.booths.map(booth => {
       return (
-        <Table.Row key={booth[0]}>
-          <Table.Cell>{booth[0]}</Table.Cell>
-          <Table.Cell>{booth[1]}</Table.Cell>
+        <Table.Row key={parseInt(booth[0]).toString()}>
+          <Table.Cell>{parseInt(booth[0]).toString()}</Table.Cell>
+          <Table.Cell>{parseInt(booth[1]).toString()}</Table.Cell>
           <Table.Cell>{booth[2]}</Table.Cell>
           <Table.Cell>{booth[3]}</Table.Cell>
 

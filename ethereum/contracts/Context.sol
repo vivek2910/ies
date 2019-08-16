@@ -1,6 +1,6 @@
 pragma solidity 0.5.1;
 
-import 'SafeMath.sol';
+import './SafeMath.sol';
 
 /*
  * @dev Provides information about the current execution context, including the

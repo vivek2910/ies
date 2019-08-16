@@ -1,6 +1,6 @@
 pragma solidity 0.5.1;
 
-import './SafeMath.sol';
+import './IES.sol';
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -12,7 +12,7 @@ import './SafeMath.sol';
  *
  * This contract is only required for intermediate, library-like contracts.
  */
-contract Context is SafeMath{
+contract Context is IES{
     // Empty internal constructor, to prevent people from mistakenly deploying
     // an instance of this contract, with should be used via inheritance.
     constructor () public { }
